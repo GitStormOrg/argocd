@@ -33,6 +33,7 @@ spec:
               name: letsencrypt-staging-cloudflare
           dataStorage:
             enabled: true
+            storageClass: csi-cinder-classic
             accessMode: ReadWriteOnce
             size: 10Gi
   destination:
