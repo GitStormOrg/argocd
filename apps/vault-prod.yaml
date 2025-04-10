@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vault-prod
+  namespace: argocd
+spec:
+  project: devops-project
+  source:
+    repoURL: https://helm.releases.hashicorp.com
+    chart: vault
+    targetRevision: 0.27.0
+    helm:
+      valueFiles:
+        - values/vault/prod-values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: vault-prod
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
