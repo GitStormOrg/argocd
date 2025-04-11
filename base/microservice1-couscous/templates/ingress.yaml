@@ -1,4 +1,5 @@
 {{- if .Values.ingress.enabled -}}
+{{- $pathType := .Values.server.ingress.pathType -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -28,11 +29,9 @@ spec:
     - host: {{ .host | quote }}
       http:
         paths:
-          {{- range .paths }}
-          - path: {{ .path }}
-            {{- with .pathType }}
-            pathType: {{ . }}
-            {{- end }}
+        {{- range (.paths | default (list "/")) }}
+          - path: {{ . }}
+            pathType: {{ $pathType }}
             backend:
               service:
                 name: {{ include "microservice1-couscous.fullname" $ }}
