@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: git@github.com:GitStormOrg/argocd.git
-    targetRevision: remaster
+    targetRevision: main
     path: base/vault
     helm:
       valueFiles:
