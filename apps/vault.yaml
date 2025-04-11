@@ -6,8 +6,8 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/GitStormOrg/argocd-repo
-    targetRevision: HEAD
+    repoURL: git@github.com:GitStormOrg/argocd.git
+    targetRevision: remaster
     path: base/vault
     chart: .
     helm:
