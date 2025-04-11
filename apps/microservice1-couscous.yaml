@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: microservice1-couscous
+  namespace: couscous
+spec:
+  project: default
+  source:
+    repoURL: git@github.com:GitStormOrg/argocd.git
+    targetRevision: microservice1-couscous
+    path: base/microservice1-couscous
+    helm:
+      valueFiles:
+        - ../../overlays/prod/microservice1-couscous/values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: microservice1-couscous
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
