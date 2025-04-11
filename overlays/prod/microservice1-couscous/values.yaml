@@ -38,4 +38,7 @@ service:
   type: ClusterIP
   port: 3000
 
-# Vous pouvez définir ici d'autres valeurs pour configurer la sécurité, les ressources, etc.
+
+# Define the imagePullSecrets as a list (it can be empty if not used)
+imagePullSecrets:
+  - name: letijeur-registry-secret
