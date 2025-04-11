@@ -7,7 +7,7 @@ ingress:
   hosts:
     - host: couscous.maxcaptab.com
       paths:
-        - /
+        - path: /
   tls:
     - hosts:
         - couscous.maxcaptab.com
@@ -16,7 +16,7 @@ ingress:
 certificate:
   enabled: true
   # Nom du Certificate (par défaut, on peut utiliser le nom du chart)
-  name: node-express-cert
+  name: microservice1-couscous-cert
   # Secret dans lequel le certificat et la clé privée seront stockés
   secretName: couscous-tls-secret
   # Référence à l'Issuer ou ClusterIssuer dans votre cluster
@@ -25,7 +25,7 @@ certificate:
     kind: ClusterIssuer
   # Liste des noms DNS pour lesquels le certificat doit être émis
   dnsNames:
-    - couscous.example.com
+    - couscous.maxcaptab.com
 
 replicaCount: 1
 

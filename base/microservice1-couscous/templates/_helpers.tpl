@@ -60,3 +60,11 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{- define "node-express.fullname" -}}
+{{ include "microservice1-couscous.fullname" . }}
+{{- end -}}
+
+{{- define "node-express.name" -}}
+{{ include "microservice1-couscous.name" . }}
+{{- end -}}
