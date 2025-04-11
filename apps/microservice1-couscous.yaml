@@ -4,20 +4,22 @@ metadata:
   name: microservice1-couscous
   namespace: argocd
 spec:
-  project: default
+  destination:
+    namespace: couscous
+    server: https://kubernetes.default.svc
   source:
+    path: base/microservice1-couscous
     repoURL: git@github.com:GitStormOrg/argocd.git
     targetRevision: couscous
-    path: base/microservice1-couscous
     helm:
       valueFiles:
         - ../../overlays/prod/microservice1-couscous/values.yaml
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: microservice1-couscous
+  sources: []
+  project: default
   syncPolicy:
     automated:
-      prune: true
-      selfHeal: true
+      prune: false
+      selfHeal: false
     syncOptions:
       - CreateNamespace=true
+      - Replace=true

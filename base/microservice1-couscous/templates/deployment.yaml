@@ -14,15 +14,15 @@ spec:
       annotations:
         # Activation de l'injection Vault
         vault.hashicorp.com/agent-inject: "true"
-        # Rôle Kubernetes défini dans Vault
+        # Rôle Kubernetes utilisé par Vault
         vault.hashicorp.com/role: "my-k8s-role"
-        # Chemin du secret dans Vault (KV Version 2 ici)
-        vault.hashicorp.com/agent-inject-secret-postgres: "secret/data/postgres"
-        # Template pour extraire uniquement la clé POSTGRES_URL du secret
+        # Chemin du secret à injecter depuis Vault
+        vault.hashicorp.com/agent-inject-secret-postgres: "secrets/data/postgres"
+        # Ce bloc sera injecté tel quel et évalué par Vault Agent
         vault.hashicorp.com/agent-inject-template-postgres: |
-          {{- with secret "secret/data/postgres" -}}
-          {{ .Data.data.POSTGRES_URL }}
-          {{- end }}
+          {{"{{"}}- with secret "secret/data/postgres" -{{"}}"}}
+          {{"{{"}} .Data.data.POSTGRES_URL {{"}}"}}
+          {{"{{"}}- end {{"}}"}}
       labels:
         app: {{ include "node-express.name" . }}
     spec:
@@ -32,8 +32,6 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.service.port }}
-          # Vous pouvez ajouter d'autres variables d'environnement ici si nécessaire
           env:
             - name: PORT
               value: "{{ .Values.service.port }}"
-      # Le Vault Agent Injector monte automatiquement les secrets dans /vault/secrets dans le pod.
