@@ -8,11 +8,11 @@ spec:
   source:
     repoURL: git@github.com:GitStormOrg/argocd.git
     targetRevision: remaster
-    path: base/vault
+    path: ../base/vault
     chart: .
     helm:
       valueFiles:
-        - overlays/prod/vault/values.yaml
+        - ../overlays/prod/vault/values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: vault-prod
