@@ -3,7 +3,7 @@ server:
     enabled: true
     annotations:
       kubernetes.io/ingress.class: nginx
-      cert-manager.io/cluster-issuer: letsencrypt-staging-cloudflare
+      cert-manager.io/cluster-issuer: letsencrypt-pro-cloudflare
     hosts:
       - host: vault.maxcaptab.com
         paths:
@@ -18,7 +18,7 @@ server:
     issuer:
       group: cert-manager.io
       kind: ClusterIssuer
-      name: letsencrypt-staging-cloudflare
+      name: letsencrypt-prod-cloudflare
 
   dataStorage:
     enabled: true
