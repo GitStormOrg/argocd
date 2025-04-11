@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: git@github.com:GitStormOrg/argocd.git
-    targetRevision: microservice1-couscous
+    targetRevision: couscous
     path: base/microservice1-couscous
     helm:
       valueFiles:
