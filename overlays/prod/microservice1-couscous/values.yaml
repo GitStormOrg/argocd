@@ -30,9 +30,9 @@ certificate:
 replicaCount: 1
 
 image:
-  repository: letijeur/mon-site:couscous
+  repository: letijeur/mon-site
   pullPolicy: IfNotPresent
-  tag: "latest"
+  tag: "couscous"
 
 service:
   type: ClusterIP
