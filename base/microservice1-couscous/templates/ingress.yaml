@@ -31,9 +31,7 @@ spec:
         paths:
           {{- range .paths }}
           - path: {{ .path }}
-            {{- with .pathType }}
             pathType: "Prefix"
-            {{- end }}
             backend:
               service:
                 name: {{ include "microservice1-couscous.fullname" $ }}
