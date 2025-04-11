@@ -1,0 +1,27 @@
+server:
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      cert-manager.io/cluster-issuer: letsencrypt-staging-cloudflare
+    hosts:
+      - host: vault.maxcaptab.com
+        paths:
+          - /
+    tls:
+      - hosts:
+          - vault.maxcaptab.com
+        secretName: vault-tls
+
+  certificate:
+    enabled: true
+    issuer:
+      group: cert-manager.io
+      kind: ClusterIssuer
+      name: letsencrypt-staging-cloudflare
+
+  dataStorage:
+    enabled: true
+    storageClass: csi-cinder-classic
+    accessMode: ReadWriteOnce
+    size: 10Gi
