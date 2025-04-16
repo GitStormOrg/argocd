@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: meteonow-dev
+  name: meteonow-staging
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io 
@@ -13,10 +13,10 @@ spec:
     path: base/meteonow
     helm:
       valueFiles:
-        - ../../overlays/dev/meteonow/values.yaml
+        - ../../overlays/staging/meteonow/values.yaml
   destination:
     server: https://kubernetes.default.svc
-    namespace: meteonow-dev
+    namespace: meteonow-staging
   syncPolicy:
     automated:
       prune: true
@@ -27,3 +27,6 @@ spec:
       - PruneLast=true
       - Replace=true
       - ApplyOutOfSyncOnly=true
+
+
+
