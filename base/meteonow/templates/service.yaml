@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "meteonow.componentname" (dict "name" "svc" "releaseName" .Release.Name) }}
+  labels:
+    app.kubernetes.io/name: {{ include "meteonow.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 5000
+  selector:
+    app.kubernetes.io/name: {{ include "meteonow.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}

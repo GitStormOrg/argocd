@@ -25,3 +25,19 @@ server:
     storageClass: csi-cinder-classic
     accessMode: ReadWriteOnce
     size: 10Gi
+
+  serviceAccount:
+    create: true
+    name: vault-auth
+
+  authDelegator:
+    enabled: true
+
+vault:
+  address: "http://vault.vault-prod.svc:8200"
+  auth:
+    enabled: true
+    path: "auth/kubernetes"
+  # etc.
+
+kubernetesHost: "https://kubernetes.default.svc"

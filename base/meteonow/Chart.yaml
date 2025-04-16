@@ -1,0 +1,17 @@
+apiVersion: v2
+name: meteonow
+version: 0.1.0
+description: A Helm chart for deploying the MeteoNow Flask app with Vault Agent Injector
+
+type: application
+keywords:
+  - flask
+  - vault
+  - weather
+  - meteonow
+home: https://github.com/GitStormOrg/microservice2-MeteoNow
+sources:
+  - https://github.com/GitStormOrg/microservice2-MeteoNow
+maintainers:
+  - name: GitStorm
+    email: team@gitstorm.com

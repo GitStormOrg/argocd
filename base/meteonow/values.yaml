@@ -1,0 +1,53 @@
+# Default values for <APP_NAME> Helm chart
+
+replicaCount: 1  # Number of application pods to deploy
+
+image:
+  repository: <your-docker-registry>/<your-image>  # Docker image repo (e.g., docker.io/youruser/app)
+  tag: <image-tag>                                 # Image tag (e.g., latest, v1.0.0)
+  pullPolicy: IfNotPresent                         # Can be Always / IfNotPresent / Never
+
+imagePullSecrets:
+  - name: <your-secret-name>  # Kubernetes secret for pulling from private registry (optional)
+
+nameOverride: ""         # Optional: override chart name
+fullnameOverride: ""     # Optional: override full name of charted objects
+
+serviceAccount:
+  create: true           # Whether to create a service account
+  name: <custom-sa-name> # Optional: override the generated service account name
+
+service:
+  type: ClusterIP        # Kubernetes service type: ClusterIP / NodePort / LoadBalancer
+  name: <service-name>   # Logical name of the service
+  port: 80               # Port exposed by the service (matches ingress targetPort)
+
+ingress:
+  enabled: true          # Whether to enable ingress
+  className: "nginx"     # Ingress class (e.g., nginx, traefik)
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: <your-ingress-class>                    # ex: nginx
+    cert-manager.io/cluster-issuer: <your-cluster-issuer>               # ex: letsencrypt-staging-cloudflare
+  hosts:
+    - host: <your-domain.com>
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - hosts:
+        - <your-domain.com>
+      secretName: <tls-secret-name>  # Must match cert-manager or manually created TLS secret
+
+vault:
+  enabled: true                               # Enable Vault Agent Injector
+  role: <vault-role>                          # Vault role used by the pod
+  secretPath: <vault-secret-path>             # Secret path in Vault (e.g., secrets/data/app/api)
+
+resources: {}             # Define requests and limits (cpu/memory) if needed
+
+nodeSelector: {}          # Define target node labels (e.g., "disktype: ssd")
+
+tolerations: []           # Define pod tolerations (for tainted nodes)
+
+affinity: {}              # Define pod scheduling affinity rules

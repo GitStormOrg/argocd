@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: meteonow-dev
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io 
+spec:
+  project: default
+  source:
+    repoURL: git@github.com:GitStormOrg/argocd.git
+    targetRevision: main
+    path: base/meteonow
+    helm:
+      valueFiles:
+        - ../../overlays/dev/meteonow/values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: meteonow-dev
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - Prune=true
+      - PruneLast=true
+      - Replace=true
+      - ApplyOutOfSyncOnly=true
+
+
+

@@ -1,0 +1,42 @@
+{{- if .Values.vault.auth.enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: vault-auth-setup
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: vault-auth-setup
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  template:
+    spec:
+      serviceAccountName: vault-auth
+      restartPolicy: OnFailure
+      containers:
+        - name: vault-auth-config
+          image: hashicorp/vault:1.15.0
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              echo "⏳ Configuring Vault Kubernetes auth method..."
+              SA_JWT_TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+              SA_CA_CRT=$(cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt)
+              K8S_HOST="{{ .Values.kubernetesHost }}"
+
+              vault write {{ .Values.vault.auth.path | default "auth/kubernetes" }}/config \
+                token_reviewer_jwt="$SA_JWT_TOKEN" \
+                kubernetes_host="$K8S_HOST" \
+                kubernetes_ca_cert="$SA_CA_CRT"
+
+              echo "✅ Vault Kubernetes auth configured."
+          env:
+            - name: VAULT_ADDR
+              value: "{{ .Values.vault.address }}"
+            - name: VAULT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: vault-bootstrap-token
+                  key: VAULT_TOKEN
+{{- end }}
