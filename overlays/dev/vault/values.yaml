@@ -33,8 +33,11 @@ server:
   authDelegator:
     enabled: true
 
-  vault:
-    address: "http://vault.vault-prod.svc:8200"
-    authPath: "auth/kubernetes"
+vault:
+  address: "http://vault.vault-prod.svc:8200"
+  auth:
+    enabled: true
+    path: "auth/kubernetes"
+  # etc.
 
-  kubernetesHost: "https://kubernetes.default.svc"
+kubernetesHost: "https://kubernetes.default.svc"

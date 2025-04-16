@@ -1,3 +1,4 @@
+{{- if .Values.vault.auth.enabled }}
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -24,7 +25,7 @@ spec:
               SA_CA_CRT=$(cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt)
               K8S_HOST="{{ .Values.kubernetesHost }}"
 
-              vault write {{ .Values.vault.authPath | default "auth/kubernetes" }}/config \
+              vault write {{ .Values.vault.auth.path | default "auth/kubernetes" }}/config \
                 token_reviewer_jwt="$SA_JWT_TOKEN" \
                 kubernetes_host="$K8S_HOST" \
                 kubernetes_ca_cert="$SA_CA_CRT"
@@ -38,4 +39,4 @@ spec:
                 secretKeyRef:
                   name: vault-bootstrap-token
                   key: VAULT_TOKEN
-
+{{- end }}
