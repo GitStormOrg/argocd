@@ -1351,3 +1351,6 @@ serverTelemetry:
       #    for: 5m
       #    labels:
       #      severity: critical
+vault:
+  auth:
+    enabled: false

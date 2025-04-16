@@ -25,3 +25,7 @@ server:
     storageClass: csi-cinder-classic
     accessMode: ReadWriteOnce
     size: 10Gi
+
+vault:
+  auth:
+    enabled: false # Toggle pour activer la configuration automatique de Vault auth/kubernetes
