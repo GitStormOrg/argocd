@@ -40,7 +40,7 @@ ingress:
 
 vault:
   enabled: true                          # Enable Vault Agent sidecar injection
-  role: meteonow                         # Vault role associated with the application
+  role: meteonow-staging                   # Vault role associated with the application
   secretPath: secrets/data/meteonow/openweathermap  # Path in Vault where the API_KEY is stored
 
 resources: {}  # You can define CPU/memory requests and limits here
