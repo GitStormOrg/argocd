@@ -20,10 +20,8 @@ primary:
   extraEnvVars:
     - name: BASH_ENV                # Bash lira automatiquement ce fichier
       value: /vault/secrets/db-creds
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 8Gi
-  volumeMode: local-path
+
+  persistence:
+    enabled: true          # ou false si tu veux seulement un emptyDir
+    size: 8Gi              # laisse 8 Gi si c’est ce que tu veux
+    storageClass: local-path
