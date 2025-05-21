@@ -44,7 +44,7 @@ service:
 vault:
   enabled: true                          # Enable Vault Agent sidecar injection
   role: couscous                         # Vault role associated with the application
-  secretPath: secrets/data/postgres  # Path in Vault where the API_KEY is stored
+  secretPath: secrets/postgres  # Path in Vault where the API_KEY is stored
 
 # Define the imagePullSecrets as a list (it can be empty if not used)
 imagePullSecrets:
