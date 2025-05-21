@@ -2,10 +2,10 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: microservice1-couscous
-  namespace: argocd
+  namespace: tostack-argocd
 spec:
   destination:
-    namespace: couscous
+    namespace: couscous-dev
     server: https://kubernetes.default.svc
   source:
     path: base/microservice1-couscous
@@ -13,13 +13,16 @@ spec:
     targetRevision: couscous
     helm:
       valueFiles:
-        - ../../overlays/prod/microservice1-couscous/values.yaml
+        - ../../overlays/dev/microservice1-couscous/values.yaml
   sources: []
   project: default
   syncPolicy:
     automated:
-      prune: false
-      selfHeal: false
+      prune: true
+      selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - Prune=true
+      - PruneLast=true
       - Replace=true
+      - ApplyOutOfSyncOnly=true
