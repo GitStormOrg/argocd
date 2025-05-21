@@ -597,15 +597,15 @@ alertmanager:
 
     # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
     # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
-    ingressClassName: alb
+    # ingressClassName: alb
 
-    annotations: 
-      alb.ingress.kubernetes.io/backend-protocol: HTTP
-      alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
-      alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}, {"HTTPS":443}]'
-      alb.ingress.kubernetes.io/scheme: internet-facing
-      alb.ingress.kubernetes.io/target-type: ip
-      alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-west-1:266251346584:certificate/a1589532-8f31-434a-bd9e-ac107ad7f2a9
+    # annotations: 
+    #   alb.ingress.kubernetes.io/backend-protocol: HTTP
+    #   alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
+    #   alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}, {"HTTPS":443}]'
+    #   alb.ingress.kubernetes.io/scheme: internet-facing
+    #   alb.ingress.kubernetes.io/target-type: ip
+    #   alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-west-1:266251346584:certificate/a1589532-8f31-434a-bd9e-ac107ad7f2a9
 
     labels: {}
 
@@ -3705,15 +3705,15 @@ prometheus:
 
     # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
     # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
-    ingressClassName: alb
+    # ingressClassName: alb
 
-    annotations:
-      alb.ingress.kubernetes.io/backend-protocol: HTTP
-      alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
-      alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}, {"HTTPS":443}]'
-      alb.ingress.kubernetes.io/scheme: internet-facing
-      alb.ingress.kubernetes.io/target-type: ip
-      alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-west-1:266251346584:certificate/a1589532-8f31-434a-bd9e-ac107ad7f2a9
+    # annotations:
+    #   alb.ingress.kubernetes.io/backend-protocol: HTTP
+    #   alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
+    #   alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}, {"HTTPS":443}]'
+    #   alb.ingress.kubernetes.io/scheme: internet-facing
+    #   alb.ingress.kubernetes.io/target-type: ip
+    #   alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-west-1:266251346584:certificate/a1589532-8f31-434a-bd9e-ac107ad7f2a9
 
     labels: {}
 
