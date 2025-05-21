@@ -28,6 +28,10 @@ certificate:
 
 replicaCount: 1
 
+serviceAccount:
+  create: true      # If true, a dedicated Kubernetes service account will be created for the pod
+  name: couscous-sa          # You can override the name here (empty = auto-generated from chart name)
+
 image:
   repository: letijeur/mon-site
   pullPolicy: IfNotPresent
