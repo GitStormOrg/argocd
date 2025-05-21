@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: microservice1-couscous
+  namespace: tostack-argocd
+spec:
+  destination:
+    namespace: couscous-dev
+    server: https://kubernetes.default.svc
+  source:
+    path: base/microservice1-couscous
+    repoURL: git@github.com:GitStormOrg/argocd.git
+    targetRevision: couscous
+    helm:
+      valueFiles:
+        - ../../overlays/dev/microservice1-couscous/values.yaml
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - Prune=true
+      - PruneLast=true
+      - Replace=true
+      - ApplyOutOfSyncOnly=true

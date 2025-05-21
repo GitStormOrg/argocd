@@ -1,0 +1,44 @@
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-staging-cloudflare
+  hosts:
+    - host: couscous.maxcaptab.com
+      paths:
+        - path: /
+  tls:
+    - hosts:
+        - couscous.maxcaptab.com
+      secretName: couscous-tls-secret
+
+certificate:
+  enabled: true
+  # Nom du Certificate (par défaut, on peut utiliser le nom du chart)
+  name: microservice1-couscous-cert
+  # Secret dans lequel le certificat et la clé privée seront stockés
+  secretName: couscous-tls-secret
+  # Référence à l'Issuer ou ClusterIssuer dans votre cluster
+  issuerRef:
+    name: letsencrypt-staging-cloudflare
+    kind: ClusterIssuer
+  # Liste des noms DNS pour lesquels le certificat doit être émis
+  dnsNames:
+    - couscous.maxcaptab.com
+
+replicaCount: 1
+
+image:
+  repository: letijeur/mon-site
+  pullPolicy: IfNotPresent
+  tag: "couscous"
+
+service:
+  type: ClusterIP
+  port: 3000
+
+
+# Define the imagePullSecrets as a list (it can be empty if not used)
+imagePullSecrets:
+  - name: letijeur-registry-secret

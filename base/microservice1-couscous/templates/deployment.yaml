@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "microservice1-couscous.fullname" . }}
+  labels:
+    app: {{ include "microservice1-couscous.name" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "microservice1-couscous.name" . }}
+  template:
+    metadata:
+      annotations:
+        # Activation de l'injection Vault
+        vault.hashicorp.com/agent-inject: "true"
+        # Rôle Kubernetes utilisé par Vault
+        vault.hashicorp.com/role: "my-k8s-role"
+        # Chemin du secret à injecter depuis Vault
+        vault.hashicorp.com/agent-inject-secret-postgres: "secrets/data/postgres"
+        # Ce bloc sera injecté tel quel et évalué par Vault Agent
+        vault.hashicorp.com/agent-inject-template-postgres: |
+          {{"{{"}}- with secret "secret/data/postgres" -{{"}}"}}
+          {{"{{"}} .Data.data.POSTGRES_URL {{"}}"}}
+          {{"{{"}}- end {{"}}"}}
+      labels:
+        app: {{ include "microservice1-couscous.name" . }}
+    spec:
+      imagePullSecrets:
+        {{- if .Values.imagePullSecrets }}
+        {{- toYaml .Values.imagePullSecrets | nindent 8 }}
+        {{- end }}
+      containers:
+        - name: {{ include "microservice1-couscous.name" . }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.port }}
+          env:
+            - name: PORT
+              value: "{{ .Values.service.port }}"
