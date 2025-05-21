@@ -1,5 +1,5 @@
 standalone:
-  enabled: "true"
+  enabled: true
 
 server:
   ingress:
