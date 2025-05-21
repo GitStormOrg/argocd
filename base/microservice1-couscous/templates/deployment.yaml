@@ -26,6 +26,7 @@ spec:
       labels:
         app: {{ include "microservice1-couscous.name" . }}
     spec:
+      serviceAccountName: {{ include "couscous.componentname" (dict "name" "sa" "releaseName" .Release.Name) }}
       imagePullSecrets:
         {{- if .Values.imagePullSecrets }}
         {{- toYaml .Values.imagePullSecrets | nindent 8 }}
