@@ -20,3 +20,10 @@ primary:
   extraEnvVars:
     - name: BASH_ENV                # Bash lira automatiquement ce fichier
       value: /vault/secrets/db-creds
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 8Gi
+  volumeMode: local-path
