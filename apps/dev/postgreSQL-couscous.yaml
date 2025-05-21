@@ -8,12 +8,12 @@ spec:
     namespace: couscous-dev
     server: https://kubernetes.default.svc
   source:
-    path: base/postgreSQL-couscous
+    path: base/postgresql-couscous
     repoURL: git@github.com:GitStormOrg/argocd.git
     targetRevision: main
     helm:
       valueFiles:
-        - ../../overlays/dev/postgreSQL-couscous/values.yaml
+        - ../../overlays/dev/postgresql-couscous/values.yaml
   sources: []
   project: default
   syncPolicy:
