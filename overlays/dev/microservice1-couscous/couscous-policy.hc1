@@ -1,4 +1,4 @@
-path "*" {
+path "secret/postgres" {
   capabilities = ["read"]
 }
 
