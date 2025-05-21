@@ -27,15 +27,15 @@ ingress:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /                 # For basic path routing
     kubernetes.io/ingress.class: nginx                            # Specifies ingress controller
-    cert-manager.io/cluster-issuer: letsencrypt-staging-cloudflare  # For TLS with cert-manager
+    cert-manager.io/cluster-issuer: letsencrypt-staging # For TLS with cert-manager
   hosts:
-    - host: meteonow-dev.maxcaptab.com
+    - host: meteonow-dev.spreadit.ovh
       paths:
         - path: /            # Path exposed (prefix match)
           pathType: Prefix
   tls:
     - hosts:
-        - meteonow-dev.maxcaptab.com
+        - meteonow-dev.spreadit.ovh
       secretName: meteonow-tls  # Must match a TLS secret created by cert-manager or manually
 
 vault:
