@@ -1,19 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: microservice1-couscous
+  name: postgreSQL-couscous
   namespace: tostack-argocd
 spec:
   destination:
     namespace: couscous-dev
     server: https://kubernetes.default.svc
   source:
-    path: base/microservice1-couscous
+    path: base/postgreSQL-couscous
     repoURL: git@github.com:GitStormOrg/argocd.git
     targetRevision: main
     helm:
       valueFiles:
-        - ../../overlays/dev/microservice1-couscous/values.yaml
+        - ../../overlays/dev/postgreSQL-couscous/values.yaml
   sources: []
   project: default
   syncPolicy:
