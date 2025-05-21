@@ -22,6 +22,6 @@ primary:
       value: /vault/secrets/db-creds
 
   persistence:
-    enabled: true          # ou false si tu veux seulement un emptyDir
+    enabled: false          # ou false si tu veux seulement un emptyDir
     size: 8Gi              # laisse 8 Gi si c’est ce que tu veux
     storageClass: local-path
