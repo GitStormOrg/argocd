@@ -1,1 +1,22 @@
-replicaCount: 1
+serviceAccount:
+  create: false        # on l’a créé à la main
+  name: couscous-sa
+
+primary:
+  podAnnotations:
+    vault.hashicorp.com/agent-inject: "true"
+    vault.hashicorp.com/role: "couscous"
+    vault.hashicorp.com/agent-inject-token: "true"
+
+    # 1. quel secret récupérer ?
+    vault.hashicorp.com/agent-inject-secret-db-creds: "secret/data/postgres"
+
+    # 2. comment le transformer ?
+    vault.hashicorp.com/agent-inject-template-db-creds: |
+      {{`{{- with secret "secret/data/postgres" -}}
+      export POSTGRES_PASSWORD="{{ .Data.data.POSTGRES_PASSWORD }}"
+      {{- end}}`}}
+
+  extraEnvVars:
+    - name: BASH_ENV                # Bash lira automatiquement ce fichier
+      value: /vault/secrets/db-creds
