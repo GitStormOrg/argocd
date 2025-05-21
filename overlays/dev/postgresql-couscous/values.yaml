@@ -9,7 +9,7 @@ primary:
     vault.hashicorp.com/agent-inject: "true"
     vault.hashicorp.com/agent-inject-token: "true"
     vault.hashicorp.com/role: "couscous"
-    vault.hashicorp.com/agent-inject-secret-db-creds: "secret/data/postgres"
+    vault.hashicorp.com/agent-inject-secret-db-creds: "secrets/data/postgres"
     vault.hashicorp.com/agent-inject-template-db-creds: |
       {{`{{- with secret "secret/data/postgres" -}}
       export POSTGRES_PASSWORD="{{ .Data.data.POSTGRES_PASSWORD }}"
