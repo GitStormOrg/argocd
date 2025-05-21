@@ -3,14 +3,14 @@ server:
     enabled: true
     annotations:
       kubernetes.io/ingress.class: nginx
-      cert-manager.io/cluster-issuer: letsencrypt-prod-cloudflare
+      cert-manager.io/cluster-issuer: letsencrypt-prod
     hosts:
-      - host: vault.maxcaptab.com
+      - host: vault.spreadit.ovh
         paths:
           - /
     tls:
       - hosts:
-          - vault.maxcaptab.com
+          - vault.spreadit.ovh
         secretName: vault-tls
 
   certificate:
@@ -18,7 +18,7 @@ server:
     issuer:
       group: cert-manager.io
       kind: ClusterIssuer
-      name: letsencrypt-prod-cloudflare
+      name: letsencrypt-prod
 
   dataStorage:
     enabled: true
