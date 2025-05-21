@@ -12,6 +12,7 @@ spec:
   template:
     metadata:
       annotations:
+      {{- if .Values.vault.enabled }}
         # Activation de l'injection Vault
         vault.hashicorp.com/agent-inject: "true"
         # Rôle Kubernetes utilisé par Vault
@@ -23,6 +24,7 @@ spec:
           {{"{{"}}- with secret "secret/data/postgres" -{{"}}"}}
           {{"{{"}} .Data.data.POSTGRES_URL {{"}}"}}
           {{"{{"}}- end {{"}}"}}
+      {{- end }}
       labels:
         app: {{ include "microservice1-couscous.name" . }}
     spec:
