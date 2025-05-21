@@ -11,7 +11,7 @@ primary:
     vault.hashicorp.com/role: "couscous"
     vault.hashicorp.com/agent-inject-secret-db-creds: "secrets/data/postgres"
     vault.hashicorp.com/agent-inject-template-db-creds: |
-      {{`{{- with secret "secret/data/postgres" -}}
+      {{`{{- with secret "secrets/data/postgres" -}}
       export POSTGRES_PASSWORD="{{ .Data.data.POSTGRES_PASSWORD }}"
       {{- end}}`}}
 
