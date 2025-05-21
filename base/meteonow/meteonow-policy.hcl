@@ -1,3 +1,3 @@
-path "secrets/data/meteonow/openweathermap" {
+path "secrets/data/meteonow" {
   capabilities = ["read"]
 }
