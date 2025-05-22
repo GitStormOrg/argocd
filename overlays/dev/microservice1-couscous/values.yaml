@@ -31,7 +31,7 @@ serviceAccount:
 image:
   repository: letijeur/mon-site
   pullPolicy: IfNotPresent
-  tag: "couscous-ecfb8514"
+  tag: "couscous-385f0ebb"
 service:
   type: ClusterIP
   port: 3000
