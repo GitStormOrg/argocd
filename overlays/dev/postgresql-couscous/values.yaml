@@ -11,7 +11,7 @@ primary:
     vault.hashicorp.com/role: "couscous"
     vault.hashicorp.com/agent-inject-secret-db-creds: "secrets/data/postgres"
     vault.hashicorp.com/agent-inject-template-db-creds: |
-      {{`{{- with secret "secret/data/postgres" -}}
+      {{`{{- with secret "secrets/data/postgres" -}}
       # ↳ variable reconnue par l’image Bitnami
       export POSTGRESQL_POSTGRES_PASSWORD="{{ .Data.data.DB_PASSWORD }}"
       # (optionnel) pour un éventuel utilisateur applicatif
