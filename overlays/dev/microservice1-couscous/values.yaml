@@ -35,7 +35,7 @@ serviceAccount:
 image:
   repository: letijeur/mon-site
   pullPolicy: IfNotPresent
-  tag: "couscous5"
+  tag: "couscous7"
 
 service:
   type: ClusterIP
