@@ -3,7 +3,7 @@
 replicaCount: 1 # Number of pods to run
 image:
   repository: ens0c/registry # Docker image repository
-  tag: "" # Image tag to deploy
+  tag: "meteonow-62194d39" # Image tag to deploy
   pullPolicy: IfNotPresent # Image pull policy
 imagePullSecrets:
   - name: regcred # Replace with the name of your Kubernetes secret
