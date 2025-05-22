@@ -11,7 +11,6 @@ ingress:
     - hosts:
         - couscous.spreadit.ovh
       secretName: couscous-tls-secret
-
 certificate:
   enabled: true
   # Nom du Certificate (par défaut, on peut utiliser le nom du chart)
@@ -25,27 +24,21 @@ certificate:
   # Liste des noms DNS pour lesquels le certificat doit être émis
   dnsNames:
     - couscous.spreadit.ovh
-
 replicaCount: 1
-
 serviceAccount:
-  create: true      # If true, a dedicated Kubernetes service account will be created for the pod
-  name: couscous-sa          # You can override the name here (empty = auto-generated from chart name)
-
+  create: true # If true, a dedicated Kubernetes service account will be created for the pod
+  name: couscous-sa # You can override the name here (empty = auto-generated from chart name)
 image:
   repository: letijeur/mon-site
   pullPolicy: IfNotPresent
-  tag: "couscous5"
-
+  tag: "couscous-17b47211"
 service:
   type: ClusterIP
   port: 3000
-
 vault:
-  enabled: true                          # Enable Vault Agent sidecar injection
-  role: couscous                         # Vault role associated with the application
-  secretPath: secrets/data/postgres  # Path in Vault where the API_KEY is stored
-
+  enabled: true # Enable Vault Agent sidecar injection
+  role: couscous # Vault role associated with the application
+  secretPath: secrets/data/postgres # Path in Vault where the API_KEY is stored
 # Define the imagePullSecrets as a list (it can be empty if not used)
 imagePullSecrets:
   - name: letijeur-registry-secret
